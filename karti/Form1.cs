@@ -33,50 +33,50 @@ namespace karti
         protected override void OnPaint(PaintEventArgs e)
         {
             //if 32kart            
-                //проверочная карта
-                e.Graphics.FillRectangle(
-                            brush: Brushes.LightGray,
-                             rect: new Rectangle(
-                                x: 5,
-                                y: 5,
-                            width: wkart,
-                           height: hkart));
-                //их номера
-                if (nowisvopr)
+            //проверочная карта
+            e.Graphics.FillRectangle(
+                        brush: Brushes.LightGray,
+                            rect: new Rectangle(
+                            x: 5,
+                            y: 5,
+                        width: wkart,
+                        height: hkart));
+            //их номера
+            if (nowisvopr)
+            {
+                e.Graphics.DrawString(
+                s: colodastring[karta[1]],
+                font: kart36.Font,
+            brush: karta[0] == 0 ? Brushes.DarkRed : karta[0] == 1 ? Brushes.Red : karta[0] == 2 ? Brushes.Blue : Brushes.Cyan,
+                x: 5,
+                y: 5);
+            }
+            // РИСОВАНИЕ ввсех остальних карт
+            for (int y = 0; y < 3; y++) 
+            {
+                for (int x=0;x<12;x++) 
                 {
-                    e.Graphics.DrawString(
-                    s: colodastring[karta[1]],
-                 font: kart36.Font,
-                brush: karta[0] == 0 ? Brushes.DarkRed : karta[0] == 1 ? Brushes.Red : karta[0] == 2 ? Brushes.Blue : Brushes.Cyan,
-                    x: 5,
-                    y: 5);
-                }
-                // РИСОВАНИЕ ввсех остальних карт
-                for (int y = 0; y < 3; y++) 
-                {
-                    for (int x=0;x<12;x++) 
+                    e.Graphics.FillRectangle(
+                        brush: botonx != x || botony - 1 != y ? Brushes.LightGray :polcol32[1, 12 * y + x] ==karta[0] && polcol32[0, 12 * y + x] == karta[1] ? Brushes.Green : Brushes.DarkOrange ,
+                            x: probel + (wkart+ probel) *x, 
+                            y: otstup+probel + (hkart + probel) * y, 
+                        width: wkart,
+                        height: hkart) ;
+                    //их номера
+                    if (!nowisvopr)
                     {
-                        e.Graphics.FillRectangle(
-                            brush: botonx != x || botony - 1 != y ? Brushes.LightGray :polcol32[1, 12 * y + x] ==karta[0] && polcol32[0, 12 * y + x] == karta[1] ? Brushes.Green : Brushes.DarkOrange ,
-                                x: probel + (wkart+ probel) *x, 
-                                y: otstup+probel + (hkart + probel) * y, 
-                            width: wkart,
-                           height: hkart) ;
-                        //их номера
-                        if (!nowisvopr)
-                        {
-                            e.Graphics.DrawString(
-                                s: colodastring[polcol32[0, 12 * y + x]],
-                             font: kart36.Font,
-                            brush: polcol32[1, 12 * y + x] == 0 ? Brushes.DarkRed : polcol32[1, 12 * y + x] == 1 ? Brushes.Red : polcol32[1, 12 * y + x] == 2 ? Brushes.Blue : Brushes.Cyan,
-                                x: probel + (wkart + probel) * x,
-                                y: otstup + probel + (hkart + probel) * y);
-                        }
+                        e.Graphics.DrawString(
+                            s: colodastring[polcol32[0, 12 * y + x]],
+                            font: kart36.Font,
+                        brush: polcol32[1, 12 * y + x] == 0 ? Brushes.DarkRed : polcol32[1, 12 * y + x] == 1 ? Brushes.Red : polcol32[1, 12 * y + x] == 2 ? Brushes.Blue : Brushes.Cyan,
+                            x: probel + (wkart + probel) * x,
+                            y: otstup + probel + (hkart + probel) * y);
                     }
-                    
                 }
-                //чистим масив
-                Array.Clear(colodabool,0,colodabool.Length);            
+                    
+            }
+            //чистим масив
+            Array.Clear(colodabool, 0, colodabool.Length);
         }
         public void RandomCart()
         {
